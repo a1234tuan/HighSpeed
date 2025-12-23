@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 连接数据库 -->
+	<context:property-placeholder location="classpath:db.properties,classpath:config.properties"/>
+
+	<!--数据库连接池 默认数据不需要修改-->
+	<!-- 如果修改，name后的值不能修改，只能修改value后的值 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<!--连接池的最大数据库连接数 可以修改-->
+		<property name="maxActive" value="10"/>
+		<!--最大空闲数 可以修改 -->
+		<property name="maxIdle" value="5"/>
+	</bean>
+	<!--SqlSessionFactory配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!--加载mybatis核心配置文件 -->
+		<property name="configLocation" value="classpath:SqlMapConfig.xml"/>
+		<!--别名包扫描 -->
+		<property name="typeAliasesPackage" value="com.hqyj.pojo,com.hqyj.vo"/>
+		<property name="plugins">
+   			<array>
+        		<!--配置pageHelper 分页插件-->
+       			 <bean class="com.github.pagehelper.PageInterceptor"/>
+    		</array>
+		</property>
+	</bean>
+	<!--动态代理Dao开发，第一种方式，包扫描器(推荐使用) -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--basePackage：配置映射包装扫描，多个包时用","或";"分隔 -->
+		<property name="basePackage" value="com.hqyj.dao"/>
+	</bean>
+</beans>
