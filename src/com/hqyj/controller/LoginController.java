@@ -12,7 +12,7 @@ import com.hqyj.service.UserService;
 public class LoginController {
 	
 	@Autowired
-	public UserService userService;
+	private UserService userService;
 	
 	@RequestMapping("login")
 	public String login(User user,Model model){//User类中属性名必须和前台input标签name的值一致。
@@ -20,6 +20,7 @@ public class LoginController {
 		//调用UserService
 		String result = userService.login(user);
 		if("登录成功".equals(result)){
+			model.addAttribute("USERNAME",user.getName());//将登录的用户名传递到前台
 			return "main";//jsp页面的名称
 		}else{
 			//把错误信息返回jsp

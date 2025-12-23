@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>高速管理系统</title>
 </head>
-<body>
-
-</body>
+<frameset cols="260,*" frameborder="no" framespacing="0">
+	<frame src="${pageContext.request.contextPath}/userController/preMenu.action?username=${USERNAME}">
+	<frame src="" name="content">
+</frameset>
 </html>
