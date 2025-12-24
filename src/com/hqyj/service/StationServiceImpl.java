@@ -11,10 +11,11 @@ import com.hqyj.pojo.Station;
 
 @Service
 @Transactional
-public class StationServiceImpl implements StationService{	
-	@Autowired
-	private StationDao stationDao;
-	public List<Station> query(Integer pageno){
-		return stationDao.queryAll();
-	}
+public class StationServiceImpl implements StationService{
+    @Autowired
+    private StationDao stationDao;
+    
+    public List<Station> query(Integer pageno) {
+        return stationDao.queryAll();
+    }
 }

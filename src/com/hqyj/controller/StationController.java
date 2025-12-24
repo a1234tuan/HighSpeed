@@ -18,7 +18,7 @@ public class StationController {
     private StationService stationService;
 
     @RequestMapping("list")
-    public String list(Integer pageno, Model model) { //参数名必须和前台变量统一，叫做pageno
+    public String list(Integer pageno, Model model) {//参数名必须和前台变量统一，叫做pageno
         List<Station> list = stationService.query(pageno);
         model.addAttribute("LIST", list);
         return "stationList";
