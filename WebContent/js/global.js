@@ -1,5 +1,5 @@
 // 后端访问地址前缀
-var baseUrl = "http://localhost:8080/HighSpeed";
+var baseUrl = "http://localhost:8080/HighSpeedFeeV2";
 
 //全局的ajax访问，处理ajax清求时session超时  
 $.ajaxSetup({   

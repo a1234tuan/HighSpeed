@@ -7,10 +7,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <!-- 页面基础网址，如果没有给绝对路径写的是相对路径，自动从base路径开始请求 -->
+    <base href="<%=basePath%>"><!-- http://localhost:8082/HighSpeedFee/ -->
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
 	<!--设置浏览器的布局视口，只在移动端浏览器起作用-->
-	<base href="<%=basePath%>"><!--http://localhost:8082/HighSpeedFee/ -->
 	<meta name="viewport" content="width=width-device,initial-scale=1,user-scalable=no" />
 	<!--引入bootstrap的核心css-->
 	<link rel="stylesheet" href="js/bootstrap/css/bootstrap.css" />
@@ -73,13 +74,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>	
 
 		<p class="text-center" style="color:#eeeeee">
-		欢迎你，<span id="empLoginName">${sessionScope.USER.name}</span>
+		                欢迎你，<span id="${sessionScope.USER.name }"></span>
 		</p>
 		
 		<!-- 左侧导航链接 -->
 		<div class="row nav-left">
 			<div class="list-group">
-				<a href="stationlist.html" target="content" class="list-group-item">站点管理</a>
+				<a href="stationController/list.action?pageno=1" target="content" class="list-group-item">站点管理</a>
 				<a href="Jsylist.html" target="content" class="list-group-item">驾驶员管理</a>
 				<a href="Carlist.html" target="content" class="list-group-item">车辆管理</a>
 				<a href="InStation.html" target="content" class="list-group-item">收费管理</a>

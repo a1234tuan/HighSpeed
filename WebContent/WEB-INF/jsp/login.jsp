@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -44,27 +45,27 @@
     <!--登陆主体结束-->
     
     <!--引入jquery-->
-    <script src="${pageContext.request.contextPath}"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <!-- 引入全局公共js文件 -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/global.js"></script>
     <!-- 引入layer弹出层js功能 -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            // 判断是否有头像数据
-            if (localStorage.getItem('empPic')) {
-                $('#header-pic').css('background','url(' + localStorage.getItem('empPic') + ')');
+   <script type="text/javascript">
+    $(document).ready(function() {
+        $('#login-btn').click(function(event) {
+            var name = $("#name").val().trim();
+            var pwd = $("#pwd").val().trim();
+            if(name.length==0) {
+                alert("请输入用户名");
+            }else if(pwd.length==0) {
+                alert("请输入密码");
+            }else{
+                $("#loginForm").submit();
             }
-            
-            //用户登录
-            $('#login-btn').click(function(event) {
-                
-                 location.href="main.html";
-
-            });
 
         });
+
+    });
     </script>
 </body>
 </html>
