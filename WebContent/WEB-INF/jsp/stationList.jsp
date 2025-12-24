@@ -51,8 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th>操作</th>
 				</tr>
 			</thead>
-			<tbody>				
-				<c:forEach items="${LIST}" var="item">
+			<tbody>	
+				<form action="stationController/batchDel.action" method="get" id="myform">		
+				<c:forEach items="${PAGE.list }" var="item">
 				    <tr>
 				        <td>${item.sid}</td>
 				        <td>${item.name}</td>
@@ -66,6 +67,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:forEach>
 			</tbody>
 		</table>
+		 <div class="row">
+	    	一共查询到${PAGE.total}条记录，共${PAGE.pages}页，当前是第${PAGE.pageNum}页
+	   	 <button id="btn1" onclick="jump(-1)">上一页</button>
+	   	 <button id="btn2" onclick="jump(1)">下一页</button>
+</div>
 	</div>
 	
 	<!--引入jquery-->
@@ -78,14 +84,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/layer/layer.js"></script>
 	<script>
 	
-	      function del(){
-			  var result = confirm("确认删除吗");
-			  if(result){
-				  alert("删除成功");
-			  }else{
-				  
-			  }
-		  }
+		function jump(i) {
+		    var currentPageNum = ${PAGE.pageNum};
+		    // 当当前页是1, i是-1, 直接返回; 当前页是最后一页, i是1, 直接返回; 否则请求后台
+		    currentPageNum += i;
+		    // 请求后台
+		    location.href = "stationController/list.action?pageno=" + currentPageNum;
+		}
+	
+		$(function() { // 页面加载完后执行, jquery
+		    // 判断当前页如果是第一页, 上一页按钮不可用; 如果当前页是最后一页, 下一页按钮不可用
+		    var currentPageNum = ${PAGE.pageNum};
+		    var pages = ${PAGE.pages};
+		    if (currentPageNum == 1) {
+		        $("#btn1").prop("disabled", true);
+		    }
+		    if (currentPageNum == pages) {
+		        $("#btn2").prop("disabled", true);
+		    }
+		})
 	</script>
 </body>
 </html>

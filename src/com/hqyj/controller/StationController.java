@@ -1,14 +1,14 @@
 package com.hqyj.controller;
 
 import java.util.List;
-
+// 补充以下核心引用
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.hqyj.pojo.Station;
+import com.github.pagehelper.PageInfo;
 import com.hqyj.service.StationService;
+import com.hqyj.pojo.Station;
 
 @Controller
 @RequestMapping("stationController")
@@ -18,9 +18,9 @@ public class StationController {
     private StationService stationService;
 
     @RequestMapping("list")
-    public String list(Integer pageno, Model model) {//参数名必须和前台变量统一，叫做pageno
-        List<Station> list = stationService.query(pageno);
-        model.addAttribute("LIST", list);
+    public String list(Integer pageno, Model model) {// 参数名必须和前台变量统一，叫做pageno
+        PageInfo<Station> page = stationService.query(pageno);
+        model.addAttribute("PAGE", page);
         return "stationList";
     }
 }
