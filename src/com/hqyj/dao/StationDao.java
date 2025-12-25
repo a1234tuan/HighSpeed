@@ -6,4 +6,5 @@ import com.hqyj.pojo.Station;
 
 public interface StationDao {
 	public List<Station> query(String name);
+	public int add(Station station);
 }

@@ -32,4 +32,8 @@ public class StationServiceImpl implements StationService {
         PageInfo<Station> pageInfo = new PageInfo<Station>(list);
         return pageInfo;
     }
+    @Override
+    public int add(Station s){
+    	return stationDao.add(s);
+    }
 }

@@ -14,5 +14,10 @@
         </where>
         order by createtime
     </select>
-
+	
+	<insert id="add" parameterType="station">
+        insert into station values(null, #{name}, #{price}, now())
+    </insert>
+    
+    
 </mapper>

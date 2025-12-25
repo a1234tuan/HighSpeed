@@ -44,7 +44,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        <a href="javascript:myquery()" class="btn btn-success btn-block">查询</a>
 		    </div>
 		    <div class="col-sm-offset-5 col-sm-2">
-		        <a href="AddStation.html" class="btn btn-success btn-block">增加新站点</a>
+		    
+		        <a href="stationController/preAdd.action" class="btn btn-success btn-block">增加新站点</a>
 		    </div>
 		</div>
 		<br/>

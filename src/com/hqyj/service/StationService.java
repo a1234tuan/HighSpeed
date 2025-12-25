@@ -7,4 +7,5 @@ import com.hqyj.pojo.Station;
 
 public interface StationService {
 	public PageInfo<Station> query(Integer pageno,String name);
+	public int add(Station s);
 }
