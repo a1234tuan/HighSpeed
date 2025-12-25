@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="list-group">
 				<a href="stationController/list.action?pageno=1" target="content" class="list-group-item">站点管理</a>
 				<a href="driver/list.action" target="content" class="list-group-item">驾驶员管理</a>
-				<a href="Carlist.html" target="content" class="list-group-item">车辆管理</a>
+				<a href="car/list.action" target="content" class="list-group-item">车辆管理</a>
 				<a href="InStation.html" target="content" class="list-group-item">收费管理</a>
 				<a href="UpdatePwd.html" target="content" class="list-group-item">修改密码</a>
 				<a href="UpdateUser.html" target="content" class="list-group-item">修改头像</a>
