@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.DriverDao">
+
+    <!-- 查询列表，支持根据名字模糊查询 -->
+    <select id="getList" parameterType="driver" resultType="driver">
+        select * from driver
+        <where>
+            <if test="name != null and name != ''">
+                and name like '%${name}%'
+            </if>
+        </where>
+    </select>
+
+    <!-- 添加驾驶员，注意dno不是自增，是手动输入的驾驶证号 -->
+    <insert id="add" parameterType="driver">
+        insert into driver(dno, name, createtime)
+        values(#{dno}, #{name}, now())
+    </insert>
+
+</mapper>

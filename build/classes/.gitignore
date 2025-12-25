@@ -1,8 +1,1 @@
-/SqlMapConfig.xml
-/application_dao.xml
-/application_service.xml
 /com/
-/config.properties
-/db.properties
-/log4j.properties
-/springmvc.xml
