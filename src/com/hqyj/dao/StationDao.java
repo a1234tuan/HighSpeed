@@ -8,4 +8,6 @@ public interface StationDao {
 	public List<Station> query(String name);
 	public int add(Station station);
 	public int delete(Integer sid);
+	public Station getBySid(Integer sid);
+	public int update(Station station);
 }

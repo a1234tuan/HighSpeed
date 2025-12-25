@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <td>${item.price}</td>
 				
 				        <td>
-				            <a href="UpdateStation.html" class="btn btn-primary btn-sm update-btn">修改</a>
+				            <a href="stationController/preUpdate.action?sid=${item.sid }" class="btn btn-primary btn-sm update-btn">修改</a>
 				            <a href="javascript:del(${item.sid });" class="btn btn-danger btn-sm del-btn" data-id="6">删除</a>
 				        </td>
 				    </tr>

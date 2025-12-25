@@ -22,4 +22,12 @@
     <delete id="delete" parameterType="int">
         delete from station where sid=#{sid}
     </delete>
+    
+    <select id="getBySid" parameterType="int" resultType="station">
+        select * from station where sid = #{sid}
+    </select>
+    
+    <update id="update" parameterType="station">
+        update station set name=#{name}, price=#{price} where sid = #{sid}
+    </update>
 </mapper>

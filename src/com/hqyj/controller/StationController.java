@@ -77,4 +77,38 @@ public class StationController {
         // 转发回列表页面重新查询数据
         return "forward:list.action";
     }
+    
+    @RequestMapping("preUpdate")
+    public String preUpdate(Integer sid, Model model) {
+        // 1. 调用 service，根据 sid 获取数据库中对应的 Station 对象
+        Station s = stationService.getBySid(sid);
+        
+        // 2. 将 station 对象存入 Model，传递给前端页面进行回显
+        model.addAttribute("STATION", s);
+        
+        // 3. 跳转到修改页面 (stationUpdate.jsp)
+        return "stationUpdate";
+    }
+    
+    
+    @RequestMapping("update")
+    public String update(Station s, Model model) {
+        int result = 0;
+        try {
+            // 调用 service 执行数据库更新操作
+            result = stationService.update(s);
+        } catch (Exception e) {
+            result = 0;
+            e.printStackTrace(); // 将异常信息打印到控制台
+        }
+        
+        if (result > 0) {
+            // 修改成功，转发至列表页面重新加载数据
+            return "forward:list.action";
+        } else {
+            // 修改失败，返回修改页面并显示错误信息
+            model.addAttribute("MSG", "修改失败");
+            return "stationUpdate";
+        }
+    }
 }
