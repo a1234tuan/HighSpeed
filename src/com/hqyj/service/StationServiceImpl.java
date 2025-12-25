@@ -21,14 +21,14 @@ public class StationServiceImpl implements StationService {
 
     @Autowired
     private StationDao stationDao;    
-    public PageInfo<Station> query(Integer pageno) {
+    public PageInfo<Station> query(Integer pageno,String name) {
         // 告诉PageHelper获取的是第pageno页，每页是pageSize条记录
         System.out.println("====" + pageSize);
         PageHelper.startPage(pageno, pageSize);
         
         // PageHelper.startPage(pageno, Integer.parseInt(pageSize));
         
-        List<Station> list = stationDao.queryAll();
+        List<Station> list = stationDao.query(name);
         PageInfo<Station> pageInfo = new PageInfo<Station>(list);
         return pageInfo;
     }

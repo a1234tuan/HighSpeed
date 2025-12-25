@@ -5,5 +5,5 @@ import java.util.List;
 import com.hqyj.pojo.Station;
 
 public interface StationDao {
-	public List<Station> queryAll();
+	public List<Station> query(String name);
 }

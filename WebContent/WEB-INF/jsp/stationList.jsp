@@ -35,13 +35,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<ol class="breadcrumb">
 			<li>站点管理</li>
 		</ol>
-
 		<h2 class="page-header">站点列表</h2>
-        <div class="row">
-			<div class="col-sm-offset-8 col-sm-4">
-				<a href="AddStation.html" class="btn btn-success btn-block">增加新站点</a>
-			</div>
+		<div class="row">
+		    <div class="col-sm-offset-0 col-sm-2">
+		        <input type="text" id="searchname" name="searchname" value="${param.searchname }" placeholder="请输入站点名称">
+		    </div>
+		    <div class="col-sm-offset-1 col-sm-2">
+		        <a href="javascript:myquery()" class="btn btn-success btn-block">查询</a>
+		    </div>
+		    <div class="col-sm-offset-5 col-sm-2">
+		        <a href="AddStation.html" class="btn btn-success btn-block">增加新站点</a>
+		    </div>
 		</div>
+		<br/>
 		<table class="table table-bordered table-striped" id="dataTable">
 			<thead>
 				<tr>
@@ -83,13 +89,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 引入layer弹出层js功能 -->
 	<script type="text/javascript" src="js/layer/layer.js"></script>
 	<script>
-	
+		function myquery() {
+		    // 得到输入的站点名称
+		    var searchname = $("#searchname").val();
+		    // 提交请求到后台
+		    location.href = "stationController/list.action?pageno=1&searchname=" + searchname;
+		}
 		function jump(i) {
 		    var currentPageNum = ${PAGE.pageNum};
 		    // 当当前页是1, i是-1, 直接返回; 当前页是最后一页, i是1, 直接返回; 否则请求后台
 		    currentPageNum += i;
 		    // 请求后台
-		    location.href = "stationController/list.action?pageno=" + currentPageNum;
+		    // 3. 获取查询输入框站点名称的值 (确保分页时带着搜索条件)
+    		var searchname = $("#searchname").val();
+		    location.href = "stationController/list.action?pageno=" + currentPageNum+"&searchname=" + searchname;
 		}
 	
 		$(function() { // 页面加载完后执行, jquery

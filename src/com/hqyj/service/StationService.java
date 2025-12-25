@@ -6,5 +6,5 @@ import com.github.pagehelper.PageInfo;
 import com.hqyj.pojo.Station;
 
 public interface StationService {
-	public PageInfo<Station> query(Integer pageno);
+	public PageInfo<Station> query(Integer pageno,String name);
 }

@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
 <mapper namespace="com.hqyj.dao.StationDao">
-    <select id="queryAll" resultType="station">
-        select * from station order by createtime
+
+    <select id="query" parameterType="java.lang.String" resultType="station">
+        select * from station
+        <where>
+            <if test="value != null and value != ''">
+                name like '%${value}%'
+            </if>
+        </where>
+        order by createtime
     </select>
+
 </mapper>
