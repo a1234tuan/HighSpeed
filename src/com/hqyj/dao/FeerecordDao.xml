@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.FeerecordDao">
+
+    <!-- 多表联查：Feerecord + Car + Driver + Station -->
+    <select id="getList" parameterType="feerecordVO" resultType="feerecordVO">
+        SELECT 
+            f.*, 
+            c.name as carName, 
+            d.name as driverName,
+            s1.name as beginStation,
+            s2.name as endStation
+        FROM feerecord f
+        LEFT JOIN car c ON f.cno = c.cno
+        LEFT JOIN driver d ON c.dno = d.dno   <!-- 连接驾驶员表 -->
+        LEFT JOIN station s1 ON f.beginid = s1.sid
+        LEFT JOIN station s2 ON f.endid = s2.sid
+        <where>
+            <!-- 支持按车牌号查询 -->
+            <if test="cno != null and cno != ''">
+                and f.cno like '%${cno}%'
+            </if>
+        </where>
+        ORDER BY f.createtime DESC
+    </select>
+
+    <insert id="add" parameterType="feerecord">
+        insert into feerecord(cno, beginid, endid, price, state, backup, createtime)
+        values(#{cno}, #{beginid}, #{endid}, #{price}, #{state}, #{backup}, now())
+    </insert>
+
+</mapper>

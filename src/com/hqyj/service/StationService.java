@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.hqyj.pojo.Station;
 
 public interface StationService {
+    public List<Station> getAll();
 	public PageInfo<Station> query(Integer pageno,String name);
 	public int add(Station s);
 	public int delete(Integer sid);

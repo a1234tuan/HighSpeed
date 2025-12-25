@@ -32,6 +32,13 @@ public class StationServiceImpl implements StationService {
         PageInfo<Station> pageInfo = new PageInfo<Station>(list);
         return pageInfo;
     }
+    
+    @Override
+    public List<Station> getAll() {
+        // 直接调用DAO查询，不要加PageHelper，传入null表示没有模糊查询条件，查所有
+        // 假设你的dao.query支持null参数（通常MyBatis xml里会有 <if test="name!=null"> 的判断）
+        return stationDao.query(null); 
+    }
     @Override
     public int add(Station s){
     	return stationDao.add(s);
