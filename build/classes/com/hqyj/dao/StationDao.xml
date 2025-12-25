@@ -19,5 +19,7 @@
         insert into station values(null, #{name}, #{price}, now())
     </insert>
     
-    
+    <delete id="delete" parameterType="int">
+        delete from station where sid=#{sid}
+    </delete>
 </mapper>

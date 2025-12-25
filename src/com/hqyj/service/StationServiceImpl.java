@@ -36,4 +36,9 @@ public class StationServiceImpl implements StationService {
     public int add(Station s){
     	return stationDao.add(s);
     }
+    
+    @Override
+    public int delete(Integer sid){
+    	return stationDao.delete(sid);
+    }
 }

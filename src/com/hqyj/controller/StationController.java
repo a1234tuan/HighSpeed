@@ -55,4 +55,26 @@ public class StationController {
             return "stationAdd";
         }
     }
+    
+    @RequestMapping("delete")
+    public String delete(Integer sid, Model model) {
+        int result = 0;
+        try {
+            // 调用业务层执行删除操作
+            result = stationService.delete(sid);
+        } catch (Exception e) {
+            result = 0;
+            e.printStackTrace();
+        }
+        
+        // 无论成功失败，都将结果提示存入 Model
+        if (result > 0) {
+            model.addAttribute("MSG", "删除成功");
+        } else {
+            model.addAttribute("MSG", "删除失败");
+        }
+        
+        // 转发回列表页面重新查询数据
+        return "forward:list.action";
+    }
 }

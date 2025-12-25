@@ -35,7 +35,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<ol class="breadcrumb">
 			<li>站点管理</li>
 		</ol>
-		<h2 class="page-header">站点列表</h2>
+		<h2 class="page-header">站点列表
+			<font color="red">${MSG }</font>
+		</h2>
 		<div class="row">
 		    <div class="col-sm-offset-0 col-sm-2">
 		        <input type="text" id="searchname" name="searchname" value="${param.searchname }" placeholder="请输入站点名称">
@@ -68,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				        <td>
 				            <a href="UpdateStation.html" class="btn btn-primary btn-sm update-btn">修改</a>
-				            <a href="javascript:del();" class="btn btn-danger btn-sm del-btn" data-id="6">删除</a>
+				            <a href="javascript:del(${item.sid });" class="btn btn-danger btn-sm del-btn" data-id="6">删除</a>
 				        </td>
 				    </tr>
 				</c:forEach>
@@ -117,6 +119,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        $("#btn2").prop("disabled", true);
 		    }
 		})
+		function del(sid) {
+	    	// 1. 弹出浏览器标准确认框
+		    var result = confirm("确认删除吗？"); // 点击取消返回 false，确定返回 true
+		    
+		    // 2. 如果用户确认删除，则发起跳转请求
+		    if (result) {
+		        location.href = "stationController/delete.action?sid=" + sid;
+		    }
+		}
 	</script>
 </body>
 </html>
