@@ -15,10 +15,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <!-- 添加驾驶员，注意dno不是自增，是手动输入的驾驶证号 -->
-    <insert id="add" parameterType="driver">
-        insert into driver(dno, name, createtime)
-        values(#{dno}, #{name}, now())
-    </insert>
+	<!-- 1. 修改 insert 语句：增加所有新字段 -->
+	<insert id="add" parameterType="driver">
+	    insert into driver(
+	        dno, name, idcard, sex, score, tel, money, backup, createtime
+	    )
+	    values(
+	        #{dno}, #{name}, #{idcard}, #{sex}, #{score}, #{tel}, #{money}, #{backup}, now()
+	    )
+	</insert>
 
 	<delete id="delete" parameterType="string">
         DELETE FROM driver WHERE dno = #{dno}
@@ -30,7 +35,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 更新操作 -->
     <update id="update" parameterType="driver">
-        update driver set name=#{name} where dno=#{dno}
-    </update>
+	    update driver set 
+	        name = #{name},
+	        idcard = #{idcard},
+	        sex = #{sex},
+	        score = #{score},
+	        tel = #{tel},
+	        money = #{money},
+	        backup = #{backup}
+	    where dno = #{dno}
+	</update>
     
 </mapper>

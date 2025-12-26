@@ -18,6 +18,7 @@
         <input type="text" name="cno" value="${searchCno}" class="form-control" placeholder="输入车牌号查询">
         <button type="submit" class="btn btn-primary">查询</button>
         <a href="feerecord/toAdd.action" class="btn btn-success pull-right">新增缴费</a>
+        <a href="feerecord/toIn.action" class="btn btn-info pull-right" style="margin-right: 10px;">车辆进站</a>
     </form>
 
     <table class="table table-bordered table-striped">

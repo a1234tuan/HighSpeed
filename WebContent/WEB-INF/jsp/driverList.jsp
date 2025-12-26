@@ -47,6 +47,10 @@
                     <th>序号</th>
                     <th>驾驶证号 (DNO)</th>
                     <th>姓名</th>
+                    <th>性别</th>        <!-- 新增 -->
+			        <th>电话</th>        <!-- 新增 -->
+			        <th>积分</th>        <!-- 新增 -->
+			        <th>余额</th>        <!-- 新增 -->
                     <th>创建时间</th>
                     <th>操作</th>
                 </tr>
@@ -57,6 +61,10 @@
                         <td>${vs.count}</td>
                         <td>${obj.dno}</td>
                         <td>${obj.name}</td>
+			            <td>${obj.sex == 1 ? '男' : '女'}</td> <!-- 新增：性别转换 -->
+			            <td>${obj.tel}</td>                   <!-- 新增 -->
+			            <td>${obj.score}</td>                 <!-- 新增 -->
+			            <td>${obj.money}</td>                 <!-- 新增 -->
                         <td><fmt:formatDate value="${obj.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td>
 						    <!-- 新增的修改按钮 -->

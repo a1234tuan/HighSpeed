@@ -59,4 +59,37 @@ public class FeerecordController {
             return "redirect:/feerecord/toAdd.action";
         }
     }
+ // 4. 去进站页面 (准备下拉框数据)
+    @RequestMapping("/toIn.action")
+    public String toIn(Model model) {
+        // 获取所有车辆
+        List<Car> carList = carService.getList(null);
+        model.addAttribute("carList", carList);
+        
+        // 获取所有站点 (作为入口站选择)
+        List<Station> stationList = stationService.getAll();
+        model.addAttribute("stationList", stationList);
+        
+        return "feerecordIn"; // 跳转到刚才新建的 feerecordIn.jsp
+    }
+    // 5. 执行进站 (保存入口信息)
+    @RequestMapping("/in.action")
+    public String in(Feerecord feerecord, Model model) {
+        // 设置进站默认状态
+        feerecord.setState(0); // 0 代表未缴费/行驶中
+        feerecord.setPrice(0); // 进站时还没产生费用
+        // endid (出口) 此时为 null，不用设置，数据库会存为 null
+        
+        // 调用 Service 的 add 方法 (复用原有的 add 即可)
+        int num = feerecordService.add(feerecord);
+        
+        if (num > 0) {
+            return "redirect:/feerecord/list.action";
+        } else {
+            // 如果失败，带上错误信息回退（或简单重定向）
+            return "redirect:/feerecord/toIn.action";
+        }
+    }
+
+    
 }
