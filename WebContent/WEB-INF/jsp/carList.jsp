@@ -61,7 +61,12 @@
                         <td>${obj.dno}</td> <!-- 这里显示关联的驾驶证号 -->
                         <td>${obj.backup}</td>
                         <td><fmt:formatDate value="${obj.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                        <td><a href="javascript:void(0)" onclick="delCar('${obj.cno}')" class="btn btn-danger btn-xs">删除</a></td>
+	                    <td>
+					    <a href="car/toUpdate.action?cno=${obj.cno}" class="btn btn-info btn-xs">修改</a>
+					    &nbsp;
+					    <a href="javascript:void(0)" onclick="delCar('${obj.cno}')" class="btn btn-danger btn-xs">删除</a>
+					    </td>
+
                     </tr>
                 </c:forEach>
             </tbody>

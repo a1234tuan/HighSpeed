@@ -23,4 +23,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="string">
         DELETE FROM driver WHERE dno = #{dno}
     </delete>
+        <!-- 根据主键查询 -->
+    <select id="getDriver" parameterType="string" resultType="driver">
+        select * from driver where dno = #{dno}
+    </select>
+    
+    <!-- 更新操作 -->
+    <update id="update" parameterType="driver">
+        update driver set name=#{name} where dno=#{dno}
+    </update>
+    
 </mapper>

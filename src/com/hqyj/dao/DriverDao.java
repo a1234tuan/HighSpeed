@@ -11,4 +11,9 @@ public interface DriverDao {
     public int add(Driver driver);
     
     public int delete(String dno);
+    
+    public Driver getDriver(String dno);
+    
+    public int update(Driver driver);
+
 }

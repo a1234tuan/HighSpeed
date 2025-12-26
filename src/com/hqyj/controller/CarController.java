@@ -70,4 +70,26 @@ public class CarController {
         return "redirect:/car/list.action";
     }
 
+    
+    // 1. 跳转到修改页面
+    @RequestMapping("/toUpdate.action")
+    public String toUpdate(String cno, Model model) {
+        // A. 查询当前这辆车的信息
+        Car car = carService.getCar(cno);
+        model.addAttribute("car", car);
+        
+        // B. 查询所有驾驶员列表（用于下拉框）
+        List<Driver> driverList = driverService.getList(null);
+        model.addAttribute("driverList", driverList);
+        
+        return "carEdit";
+    }
+
+    // 2. 执行修改
+    @RequestMapping("/update.action")
+    public String update(Car car) {
+        carService.update(car);
+        return "redirect:/car/list.action";
+    }
+
 }

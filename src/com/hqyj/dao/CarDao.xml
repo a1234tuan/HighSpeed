@@ -24,4 +24,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         DELETE FROM car WHERE cno = #{cno}
     </delete>
 
+	<select id="getCar" parameterType="string" resultType="car">
+        select * from car where cno = #{cno}
+    </select>
+
+    <update id="update" parameterType="car">
+        update car set name=#{name}, dno=#{dno}, backup=#{backup} 
+        where cno=#{cno}
+    </update>
+	
 </mapper>

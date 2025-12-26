@@ -11,4 +11,9 @@ public interface CarDao {
     public int add(Car car);
     
     public int delete(String cno);
+    
+    public Car getCar(String cno);
+
+    public int update(Car car);
+
 }

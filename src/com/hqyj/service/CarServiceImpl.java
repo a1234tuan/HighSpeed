@@ -29,4 +29,14 @@ public class CarServiceImpl implements CarService {
         return carDao.delete(cno);
     }
 
+    @Override
+    public Car getCar(String cno) {
+        return carDao.getCar(cno);
+    }
+
+    @Override
+    public int update(Car car) {
+        return carDao.update(car);
+    }
+
 }

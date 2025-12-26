@@ -58,4 +58,20 @@ public class DriverController {
             return "driverAdd";
         }
     }
+    
+    // 1. 跳转到修改页面
+    @RequestMapping("/toUpdate.action")
+    public String toUpdate(String dno, Model model) {
+        Driver driver = driverService.getDriver(dno);
+        model.addAttribute("driver", driver);
+        return "driverEdit"; // 跳转到 driverEdit.jsp
+    }
+
+    // 2. 执行修改操作
+    @RequestMapping("/update.action")
+    public String update(Driver driver) {
+        driverService.update(driver);
+        return "redirect:/driver/list.action";
+    }
+
 }

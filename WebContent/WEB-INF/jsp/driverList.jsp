@@ -58,7 +58,13 @@
                         <td>${obj.dno}</td>
                         <td>${obj.name}</td>
                         <td><fmt:formatDate value="${obj.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                        <td><a href="javascript:void(0)" onclick="delDriver('${obj.dno}')" class="btn btn-danger btn-xs">删除</a></td>
+						<td>
+						    <!-- 新增的修改按钮 -->
+						    <a href="driver/toUpdate.action?dno=${obj.dno}" class="btn btn-info btn-xs">修改</a>
+						    &nbsp;
+						    <!-- 原有的删除按钮 -->
+						    <a href="javascript:void(0)" onclick="delDriver('${obj.dno}')" class="btn btn-danger btn-xs">删除</a>
+						</td>
                     </tr>
                 </c:forEach> 
             </tbody>
