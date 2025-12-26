@@ -9,4 +9,6 @@ public interface CarDao {
     
     // Ìí¼Ó³µÁ¾
     public int add(Car car);
+    
+    public int delete(String cno);
 }

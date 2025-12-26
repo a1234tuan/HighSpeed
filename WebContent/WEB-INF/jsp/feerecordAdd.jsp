@@ -6,6 +6,7 @@
 <head>
 <base href="<%=basePath%>">
 <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="container">

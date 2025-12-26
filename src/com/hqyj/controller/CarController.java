@@ -60,4 +60,14 @@ public class CarController {
             return "carAdd";
         }
     }
+    
+    // 删除车辆
+    @RequestMapping("/delete.action")
+    public String delete(String cno) {
+        // 因为车牌号可能包含中文，为了防止乱码，通常web.xml里配置了CharacterEncodingFilter
+        // 如果还乱码，可能需要 new String(cno.getBytes("ISO-8859-1"),"UTF-8")
+        carService.delete(cno);
+        return "redirect:/car/list.action";
+    }
+
 }

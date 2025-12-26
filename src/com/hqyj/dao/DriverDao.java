@@ -9,4 +9,6 @@ public interface DriverDao {
     
     // Ìí¼Ó¼ÝÊ»Ô±
     public int add(Driver driver);
+    
+    public int delete(String dno);
 }

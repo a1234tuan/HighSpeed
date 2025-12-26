@@ -19,5 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into car(cno, name, dno, backup, createtime)
         values(#{cno}, #{name}, #{dno}, #{backup}, now())
     </insert>
+    
+    <delete id="delete" parameterType="string">
+        DELETE FROM car WHERE cno = #{cno}
+    </delete>
 
 </mapper>

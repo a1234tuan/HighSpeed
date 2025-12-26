@@ -33,6 +33,12 @@ public class DriverController {
     public String toAdd() {
         return "driverAdd";
     }
+    
+    @RequestMapping("/delete.action")
+    public String delete(String dno){
+    	driverService.delete(dno);
+    	return "redirect:/driver/list.action";
+    }
 
     // Ö´ÐÐÌí¼Ó²Ù×÷
     @RequestMapping("/add.action")

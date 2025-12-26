@@ -7,6 +7,7 @@
 <head>
 <base href="<%=basePath%>">
 <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>收费记录</title>
 </head>
 <body>

@@ -23,4 +23,10 @@ public class CarServiceImpl implements CarService {
     public int add(Car car) {
         return carDao.add(car);
     }
+    
+    @Override
+    public int delete(String cno) {
+        return carDao.delete(cno);
+    }
+
 }

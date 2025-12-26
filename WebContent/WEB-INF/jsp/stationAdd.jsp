@@ -16,6 +16,7 @@
 	<meta name="viewport" content="width=width-device,initial-scale=1,user-scalable=no" />
 	<!--引入bootstrap的核心css-->
 	<link rel="stylesheet" href="js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="css/style.css">
 	<title>增加部门</title>
 	<!--判断如果是IE9以下，引入兼容h5标签的js文件，注意空格的位置-->		
 	<!--[if lt IE 9]>

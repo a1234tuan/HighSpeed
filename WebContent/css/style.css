@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";/* style.css - 全局美化样式 */
+
+/* 1. 全局字体和背景 */
+body {
+    font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif !important; /* 强制使用微软雅黑 */
+    background-color: #f4f6f9; /* 浅灰背景，比纯白更有层次感 */
+    color: #333;
+}
+
+/* 2. 内容容器卡片化 */
+/* 这会让你的表格和表单像是浮在一张白纸上，很显高级 */
+.container {
+    background-color: #ffffff;
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 淡淡的阴影 */
+}
+
+/* 3. 标题美化 */
+h3.page-header {
+    border-bottom: 2px solid #3c8dbc; /* 标题下加一条蓝线 */
+    padding-bottom: 10px;
+    margin-top: 0;
+    color: #3c8dbc;
+    font-weight: bold;
+}
+
+/* 4. 面包屑导航美化 */
+.breadcrumb {
+    background-color: transparent !important;
+    padding-left: 0;
+    font-size: 14px;
+    color: #777;
+}
+
+/* 5. 表格美化 (这是重点) */
+.table {
+    border: 1px solid #ddd;
+}
+
+.table thead tr {
+    background-color: #3c8dbc; /* 表头变成深蓝色 */
+    color: white; /* 表头文字变白 */
+}
+
+.table thead th {
+    border-bottom: none !important;
+    font-weight: 500;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9; /* 条纹颜色更淡一点 */
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #eef7fd; /* 鼠标悬停变成淡蓝色 */
+}
+
+/* 6. 按钮微调 */
+.btn {
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 按钮加点立体感 */
+    transition: all 0.3s;
+}
+.btn:hover {
+    transform: translateY(-1px); /* 鼠标放上去按钮会上浮一点点 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}

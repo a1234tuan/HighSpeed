@@ -13,6 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>驾驶员列表</title>
 </head>
 <body>
@@ -47,6 +48,7 @@
                     <th>驾驶证号 (DNO)</th>
                     <th>姓名</th>
                     <th>创建时间</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,10 +58,18 @@
                         <td>${obj.dno}</td>
                         <td>${obj.name}</td>
                         <td><fmt:formatDate value="${obj.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td><a href="javascript:void(0)" onclick="delDriver('${obj.dno}')" class="btn btn-danger btn-xs">删除</a></td>
                     </tr>
                 </c:forEach> 
             </tbody>
         </table>
-    </div>
+	    </div>
+	    <script type="text/javascript">
+	    function delDriver(dno){
+	        if(confirm("确定要删除驾驶员 " + dno + " 吗？\n删除后，该驾驶员名下的车辆将变为无主状态。")){
+	            location.href = "driver/delete.action?dno=" + dno;
+	        }
+	    }
+</script>
 </body>
 </html>

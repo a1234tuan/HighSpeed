@@ -23,4 +23,9 @@ public class DriverServiceImpl implements DriverService {
     public int add(Driver driver) {
         return driverDao.add(driver);
     }
+    
+    @Override
+    public int delete(String dno){
+    	return driverDao.delete(dno);
+    }
 }

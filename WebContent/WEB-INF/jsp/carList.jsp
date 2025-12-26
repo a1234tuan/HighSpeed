@@ -13,6 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>车辆列表</title>
 </head>
 <body>
@@ -48,6 +49,7 @@
                     <th>所属驾驶员证号</th>
                     <th>备注信息</th>
                     <th>入库时间</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,10 +61,18 @@
                         <td>${obj.dno}</td> <!-- 这里显示关联的驾驶证号 -->
                         <td>${obj.backup}</td>
                         <td><fmt:formatDate value="${obj.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td><a href="javascript:void(0)" onclick="delCar('${obj.cno}')" class="btn btn-danger btn-xs">删除</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-    </div>
+		    </div>
+		    <script type="text/javascript">
+		    function delCar(cno){
+		        if(confirm("确定要删除车辆 " + cno + " 吗？\n注意：与之相关的收费记录也会被一并删除！")){
+		            location.href = "car/delete.action?cno=" + cno;
+		        }
+		    }
+		</script>
 </body>
 </html>

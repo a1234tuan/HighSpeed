@@ -6,4 +6,6 @@ import com.hqyj.pojo.Car;
 public interface CarService {
     public List<Car> getList(Car car);
     public int add(Car car);
+    public int delete(String cno);
+
 }
