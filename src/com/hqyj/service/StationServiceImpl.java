@@ -58,4 +58,36 @@ public class StationServiceImpl implements StationService {
     public int update(Station s){
     	return stationDao.update(s);
     }
+    
+
+    @Override
+    public int calculatePrice(Integer beginId, Integer endId) {
+        // 1. 判空
+        if (beginId == null || endId == null) {
+            return 0;
+        }
+        // 2. 从数据库查询两个站点的信息
+        Station beginStation = stationDao.getBySid(beginId);
+        Station endStation = stationDao.getBySid(endId);
+        // 如果查不到站点，返回0
+        if (beginStation == null || endStation == null) {
+            return 0;
+        }
+        // 3. 获取各自设置的金额 (price)
+        // 假设 Station POJO 里这个属性叫 price，如果是 double 需要转一下
+        int price1 = beginStation.getPrice(); 
+        int price2 = endStation.getPrice();
+        // 4. 计算逻辑
+        // 方案A：按里程/基数差价算 (比如沈阳是20，南京是80，费用就是 60)
+        int finalPrice = Math.abs(price2 - price1);
+        
+        // 方案B：如果你设置的price就是“出站一口价” (只要南京出就是80)，那就用这行：
+        // int finalPrice = price2; 
+        // 基础起步价（可选，例如最少5元）
+        if (finalPrice < 5) {
+            finalPrice = 5;
+        }
+        return finalPrice;
+    }
+
 }

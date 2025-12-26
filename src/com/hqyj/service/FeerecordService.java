@@ -1,11 +1,19 @@
 package com.hqyj.service;
+
 import java.util.List;
 import com.hqyj.pojo.Feerecord;
 import com.hqyj.vo.FeerecordVO;
 
 public interface FeerecordService {
+    // 列表查询
     public List<FeerecordVO> getList(FeerecordVO vo);
+    
+    // 进站/添加
     public int add(Feerecord feerecord);
-    public FeerecordVO getRecordById(Integer fid); // 根据ID获取单条记录详情，用于出站页面显示
-    public int updateRecord(Feerecord feerecord); // 更新记录，用于出站时更新endid, price, state
+
+    // 【修改】只保留这一个查询单条的方法，去掉 getRecordById
+    public FeerecordVO getById(Integer fid);
+    
+    // 【修改】只保留这个出站业务方法，去掉 updateRecord
+    public void outStation(Feerecord feerecord, String dno, Double currentMoney) throws Exception;
 }

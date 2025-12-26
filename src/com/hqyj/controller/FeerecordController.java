@@ -12,11 +12,15 @@ import com.hqyj.service.CarService;
 import com.hqyj.service.FeerecordService;
 import com.hqyj.service.StationService;
 import com.hqyj.vo.FeerecordVO;
+import com.hqyj.pojo.Driver; 
+import com.hqyj.dao.DriverDao; // 注入这个去查余额
+import org.springframework.web.bind.annotation.ResponseBody; // AJAX用
 
 @Controller
 @RequestMapping("/feerecord")
 public class FeerecordController {
-
+	@Autowired
+    private DriverDao driverDao; // 暂时直接在这里用dao查余额，或者封装到service
     @Autowired
     private FeerecordService feerecordService;
     @Autowired
@@ -68,5 +72,43 @@ public class FeerecordController {
         }
     }
     
-    // 出站功能(out.action) 这里暂时先不做，先把进站理顺
+    // 出站功能(out.action) 
+ // 1. 跳转到出站页面 (toOut.action)
+    @RequestMapping("/toOut.action")
+    public String toOut(Integer fid, Model model) {
+        // A. 查询当前的行驶记录
+        FeerecordVO vo = feerecordService.getById(fid);
+        model.addAttribute("record", vo);
+        
+        // B. 查询该车的驾驶员余额
+        // 注意：vo里面应该通过Car关联出了dno（在Dao的SQL里写的）
+        // 如果VO里没有dno属性，请去FeerecordVO加一个 private String dno;
+        Driver driver = driverDao.getDriverByDno(vo.getDno()); 
+        model.addAttribute("driverMoney", driver.getMoney());
+        // C. 查询可用的出站站点 (所有站点排除掉进站站点)
+        List<Station> allStations = stationService.getAll();
+        // 在页面上做排除，或者这里移除，为了简单，页面判断即可
+        model.addAttribute("stationList", allStations);
+        return "feerecordOut"; // 跳转到出站JSP
+    }
+    // 2. AJAX 计算费用接口
+	    @RequestMapping("/calcPrice.action")
+	    @ResponseBody // 返回内容给JS，不跳页面
+	    public int calcPrice(Integer beginid, Integer endid) {
+	        return stationService.calculatePrice(beginid, endid);
+	    }
+	    // 3. 确认出站 (执行扣费和更新)
+	    @RequestMapping("/out.action")
+	    public String out(Feerecord feerecord, String dno, Double currentMoney, Model model) {
+	        try {
+	            // feerecord 中包含了 fid, endid, price, backup
+	            // dno 和 currentMoney 是页面传来的，用于扣费
+	            feerecordService.outStation(feerecord, dno, currentMoney);
+	            return "redirect:/feerecord/list.action";
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            model.addAttribute("msg", "出站失败：" + e.getMessage());
+	            return "forward:/feerecord/toOut.action?fid=" + feerecord.getFid();
+	        }
+	    }
 }

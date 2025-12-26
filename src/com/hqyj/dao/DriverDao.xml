@@ -45,5 +45,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        backup = #{backup}
 	    where dno = #{dno}
 	</update>
-    
+	
+	<select id="getDriverByDno" parameterType="string" resultType="driver">
+    SELECT * FROM driver WHERE dno = #{dno}
+	</select>
+	<update id="updateMoney" parameterType="driver">
+	    UPDATE driver SET money = #{money} WHERE dno = #{dno}
+	</update>
+	    
 </mapper>

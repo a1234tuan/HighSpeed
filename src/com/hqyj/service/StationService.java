@@ -12,4 +12,6 @@ public interface StationService {
 	public int delete(Integer sid);
 	public Station getBySid(Integer sid);
 	public int update(Station s);
+    public int calculatePrice(Integer beginId, Integer endId);
+
 }

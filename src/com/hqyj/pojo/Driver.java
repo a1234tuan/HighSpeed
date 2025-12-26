@@ -10,7 +10,7 @@ public class Driver {
     private Integer sex;        // 性别 (1男 0女)
     private Integer score;      // 积分 (通常初始12分)
     private String tel;         // 电话
-    private Integer money;      // 余额 (初始0)
+    private Double money;      // 余额 (初始0)
     private String backup;      // 备注
 
     //以此处为界，下面是Get和Set方法
@@ -58,10 +58,10 @@ public class Driver {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public Integer getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	public String getBackup() {

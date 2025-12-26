@@ -15,5 +15,10 @@ public interface DriverDao {
     public Driver getDriver(String dno);
     
     public int update(Driver driver);
+    
+    // 根据驾驶证号查询驾驶员信息（含余额）
+    public Driver getDriverByDno(String dno);
 
+ // 更新余额
+    public int updateMoney(Driver driver);
 }

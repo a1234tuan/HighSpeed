@@ -28,5 +28,21 @@
         insert into feerecord(cno, beginid, endid, price, state, backup, createtime)
         values(#{cno}, #{beginid}, #{endid}, #{price}, #{state}, #{backup}, now())
     </insert>
-
+	<!-- 获取单条详情（用于出站页面回显） -->
+	<select id="getById" parameterType="int" resultType="feerecordVO">
+	    SELECT f.*, c.name as carName, c.dno, d.name as driverName, s.name as beginStation
+	    FROM feerecord f
+	    JOIN car c ON f.cno = c.cno
+	    JOIN driver d ON c.dno = d.dno
+	    JOIN station s ON f.beginid = s.sid
+	    WHERE f.fid = #{fid}
+	</select>
+	
+	<!-- 出站更新：更新出口、价格、状态、备份信息 -->
+	<update id="updateOut" parameterType="feerecord">
+	    UPDATE feerecord 
+	    SET endid = #{endid}, price = #{price}, state = 2, backup = #{backup}
+	    WHERE fid = #{fid}
+	</update>
+		
 </mapper>

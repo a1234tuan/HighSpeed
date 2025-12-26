@@ -8,4 +8,9 @@ public interface FeerecordDao {
     public List<FeerecordVO> getList(FeerecordVO vo);
     // 添加：存的是基础POJO
     public int add(Feerecord feerecord);
+    
+ // ...
+    public FeerecordVO getById(Integer fid); // 获取单条记录
+    public int updateOut(Feerecord feerecord); // 出站更新
+
 }
