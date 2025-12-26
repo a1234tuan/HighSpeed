@@ -15,5 +15,9 @@ public interface CarDao {
     public Car getCar(String cno);
 
     public int update(Car car);
+    
+    // 【新增】查询所有不在行驶中的车辆（可进站车辆）
+    public List<Car> getAvailableCarList();
+    
 
 }

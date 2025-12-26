@@ -9,5 +9,8 @@ public interface CarService {
     public int delete(String cno);
     public Car getCar(String cno);
     public int update(Car car);
+    
+    public List<Car> getAvailableCarList();
+
 
 }

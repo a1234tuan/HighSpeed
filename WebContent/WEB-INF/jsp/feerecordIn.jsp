@@ -13,58 +13,51 @@
     <title>车辆进站登记</title>
 </head>
 <body>
-<div class="container">
-    <ol class="breadcrumb">
-        <li>收费管理</li>
-        <li>进站管理</li>
-    </ol>
-    
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-info">
-                <div class="panel-heading">车辆进站登记</div>
-                <div class="panel-body">
-                    <!-- 提交到 in.action -->
-                    <form action="feerecord/in.action" method="post" class="form-horizontal">
-                        
-                        <!-- 选择车辆 -->
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">车辆车牌</label>
-                            <div class="col-sm-9">
-                                <select name="cno" class="form-control" required>
-                                    <option value="">请选择车辆</option>
-                                    <c:forEach items="${carList}" var="car">
-                                        <option value="${car.cno}">${car.cno} - ${car.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- 选择入口站 -->
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">入口站点</label>
-                            <div class="col-sm-9">
-                                <select name="beginid" class="form-control" required>
-                                    <option value="">请选择入口站</option>
-                                    <c:forEach items="${stationList}" var="st">
-                                        <option value="${st.sid}">${st.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- 按钮 -->
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" class="btn btn-info">确认进站</button>
-                                <a href="feerecord/list.action" class="btn btn-default">返回</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<!-- 省略头部引用，保留你原有的... -->
+<div class="panel-body">
+    <!-- 提交给 controller 的 in.action -->
+    <form action="feerecord/in.action" method="post" class="form-horizontal">
+        
+        <!-- 车辆下拉框 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">车牌号</label>
+            <div class="col-sm-6">
+                <select name="cno" class="form-control" required>
+                    <option value="">-- 请选择进站车辆 --</option>
+                    <!-- 循环 Controller 传来的 carList (这是已经过滤过，只有不在高速上的车) -->
+                    <c:forEach items="${carList}" var="c">
+                        <option value="${c.cno}">${c.cno} - ${c.name}</option>
+                    </c:forEach>
+                </select>
+                <!-- 如果列表为空，提示用户 -->
+                <c:if test="${empty carList}">
+                    <span style="color:red; font-size:12px;">没有可用的车辆（所有车辆都在行驶中或无数据）</span>
+                </c:if>
             </div>
         </div>
-    </div>
+
+        <!-- 进站点下拉框 -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">进站口</label>
+            <div class="col-sm-6">
+                <select name="beginid" class="form-control" required>
+                    <c:forEach items="${stationList}" var="s">
+                        <option value="${s.sid}">${s.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+
+        <!-- 进站时不需要填价格、出站口、状态，后台自动设为1和null -->
+        
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">确认进站</button>
+                <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+            </div>
+        </div>
+    </form>
 </div>
+
 </body>
 </html>

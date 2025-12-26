@@ -39,4 +39,9 @@ public class CarServiceImpl implements CarService {
         return carDao.update(car);
     }
 
+    @Override
+    public List<Car> getAvailableCarList() {
+        return carDao.getAvailableCarList();
+    }
+
 }

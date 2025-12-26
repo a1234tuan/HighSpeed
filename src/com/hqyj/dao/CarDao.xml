@@ -32,5 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update car set name=#{name}, dno=#{dno}, backup=#{backup} 
         where cno=#{cno}
     </update>
+    
+    <select id="getAvailableCarList" resultType="car">
+    SELECT * FROM car 
+    WHERE cno NOT IN (
+        SELECT cno FROM feerecord WHERE state = 1
+    )
+	</select>
 	
 </mapper>

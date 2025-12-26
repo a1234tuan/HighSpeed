@@ -20,76 +20,53 @@ public class FeerecordController {
     @Autowired
     private FeerecordService feerecordService;
     @Autowired
-    private CarService carService;       // 用于获取车辆下拉列表
+    private CarService carService;
     @Autowired
-    private StationService stationService; // 用于获取站点下拉列表
+    private StationService stationService;
 
-    // 1. 列表页
+    // 1. 收费记录列表页
     @RequestMapping("/list.action")
     public String list(FeerecordVO vo, Model model) {
+        // 分页逻辑暂时忽略，先保证能查出来
         List<FeerecordVO> list = feerecordService.getList(vo);
         model.addAttribute("list", list);
-        model.addAttribute("searchCno", vo.getCno());
-        return "feerecordList";
+        // 用于回显查询条件
+        model.addAttribute("vo", vo);
+        return "feerecordList"; // 对应下面我们要重写的jsp
     }
 
-    // 2. 去添加页面 (准备下拉框数据)
-    @RequestMapping("/toAdd.action")
-    public String toAdd(Model model) {
-        // 获取所有车辆 (衔接你之前做的Car模块)
-        List<Car> carList = carService.getList(null);
-        model.addAttribute("carList", carList);
-
-        // 获取所有站点 (用于选择入口和出口)
-        // 注意：如果你之前StationService没有写getList(null)，可能需要补一个无参查询或传空对象
-        // 假设StationService.getList用法和Car类似
-        List<Station> stationList = stationService.getAll(); 
-        model.addAttribute("stationList", stationList);
-
-        return "feerecordAdd";
-    }
-
-    // 3. 执行添加
-    @RequestMapping("/add.action")
-    public String add(Feerecord feerecord, Model model) {
-        int num = feerecordService.add(feerecord);
-        if(num > 0) {
-            return "redirect:/feerecord/list.action";
-        } else {
-            return "redirect:/feerecord/toAdd.action";
-        }
-    }
- // 4. 去进站页面 (准备下拉框数据)
+    // 2. 去进站页面 (准备下拉框数据)
     @RequestMapping("/toIn.action")
     public String toIn(Model model) {
-        // 获取所有车辆
-        List<Car> carList = carService.getList(null);
+        // 【关键修改】这里不调用 getList(null)，而是调用 getAvailableCarList
+        // 这样下拉框里就不会出现已经进站的车了
+        List<Car> carList = carService.getAvailableCarList();
         model.addAttribute("carList", carList);
         
-        // 获取所有站点 (作为入口站选择)
+        // 获取所有站点 (作为入口站)
         List<Station> stationList = stationService.getAll();
         model.addAttribute("stationList", stationList);
         
-        return "feerecordIn"; // 跳转到刚才新建的 feerecordIn.jsp
+        return "feerecordIn"; 
     }
-    // 5. 执行进站 (保存入口信息)
+
+    // 3. 执行进站动作
     @RequestMapping("/in.action")
     public String in(Feerecord feerecord, Model model) {
-        // 设置进站默认状态
-        feerecord.setState(0); // 0 代表未缴费/行驶中
-        feerecord.setPrice(0); // 进站时还没产生费用
-        // endid (出口) 此时为 null，不用设置，数据库会存为 null
+        // 设置进站状态
+        feerecord.setState(1); // 【约定】 1 代表 正在行驶/进站状态
+        feerecord.setPrice(null); // 进站还没算钱
+        feerecord.setEndid(null); // 还没出站
         
-        // 调用 Service 的 add 方法 (复用原有的 add 即可)
+        // 执行添加
         int num = feerecordService.add(feerecord);
         
         if (num > 0) {
             return "redirect:/feerecord/list.action";
         } else {
-            // 如果失败，带上错误信息回退（或简单重定向）
             return "redirect:/feerecord/toIn.action";
         }
     }
-
     
+    // 出站功能(out.action) 这里暂时先不做，先把进站理顺
 }
